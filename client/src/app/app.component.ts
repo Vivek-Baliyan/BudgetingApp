@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { isJSDocThisTag } from 'typescript';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 
@@ -15,7 +14,11 @@ export class AppComponent implements OnInit {
   opened: boolean = true;
   model: any = {};
 
-  constructor(public accountService: AccountService) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
@@ -24,16 +27,18 @@ export class AppComponent implements OnInit {
   login() {
     this.accountService.login(this.model).subscribe(
       (response) => {
-        console.log(response);
+        this.router.navigateByUrl('/budget');
       },
       (error) => {
         console.log(error);
+        this.toastr.error(error.error);
       }
     );
   }
 
   logout() {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 
   setCurrentUser() {

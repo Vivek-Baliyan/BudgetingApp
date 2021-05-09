@@ -13,12 +13,18 @@
     </a>
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Budget</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">All Accounts</a>
-      </li>
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/budget" routerLinkActive="active"
+            >Budget</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/accounts" routerLinkActive="active"
+            >All Accounts</a
+          >
+        </li>
+      </ng-container>
     </ul>
     <button
       *ngIf="accountService.currentUser$ | async"
@@ -56,6 +62,6 @@
 
   <!-- Page content -->
   <div ng-sidebar-content>
-    <app-home></app-home>
+    <router-outlet></router-outlet>
   </div>
 </ng-sidebar-container>
