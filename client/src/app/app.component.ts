@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { isJSDocThisTag } from 'typescript';
+import { User } from './_models/user';
+import { AccountService } from './_services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,23 +12,36 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'The Budgeting App';
-  users: any;
+  opened: boolean = true;
+  model: any = {};
 
-  constructor(private http: HttpClient) {}
+  constructor(public accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.setCurrentUser();
   }
 
-  getUsers() {
-    this.http.get('https://localhost:5001/api/users').subscribe(
+  login() {
+    this.accountService.login(this.model).subscribe(
       (response) => {
-        this.users = response;
+        console.log(response);
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  logout() {
+    this.accountService.logout();
+  }
+
+  setCurrentUser() {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    this.accountService.setCurrentUser(user);
+  }
+
+  toggleSidebar() {
+    this.opened = !this.opened;
   }
 }

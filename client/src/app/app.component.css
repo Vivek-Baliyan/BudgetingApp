@@ -1,0 +1,20 @@
+ng-sidebar-container {
+  height: 100vh;
+}
+
+::ng-deep .ng-sidebar {
+  width: 280px;
+  padding: 2rem 3rem;
+}
+
+.ng-sidebar-content {
+  padding: 2rem;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+a {
+  outline: 0;
+}
