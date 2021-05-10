@@ -1,0 +1,67 @@
+[
+    {
+      "UserName": "Cobb",
+      "KnownAs": "Cobb",
+      "Created": "2021-03-08",
+      "Accounts": [
+        {
+          "AccountName": "Savings"
+        },
+        {
+          "AccountName": "Current"
+        }
+      ]
+    },
+    {
+      "UserName": "Langley",
+      "KnownAs": "Langley",
+      "Created": "2021-04-28",
+      "Accounts": [
+        {
+          "AccountName": "Savings"
+        },
+        {
+          "AccountName": "Current"
+        }
+      ]
+    },
+    {
+      "UserName": "Ila",
+      "KnownAs": "Ila",
+      "Created": "2021-02-04",
+      "Accounts": [
+        {
+          "AccountName": "Savings"
+        },
+        {
+          "AccountName": "Current"
+        }
+      ]
+    },
+    {
+      "UserName": "Kayla",
+      "KnownAs": "Kayla",
+      "Created": "2021-03-28",
+      "Accounts": [
+        {
+          "AccountName": "Savings"
+        },
+        {
+          "AccountName": "Current"
+        }
+      ]
+    },
+    {
+      "UserName": "Farrell",
+      "KnownAs": "Farrell",
+      "Created": "2021-02-17",
+      "Accounts": [
+        {
+          "AccountName": "Savings"
+        },
+        {
+          "AccountName": "Current"
+        }
+      ]
+    }
+  ]
