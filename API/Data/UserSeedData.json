@@ -5,10 +5,12 @@
       "Created": "2021-03-08",
       "Accounts": [
         {
-          "AccountName": "Savings"
+          "AccountType": "Savings",
+          "AccountName": "SBI"
         },
         {
-          "AccountName": "Current"
+          "AccountType": "Current",
+          "AccountName": "HDFC"
         }
       ]
     },
@@ -18,10 +20,12 @@
       "Created": "2021-04-28",
       "Accounts": [
         {
-          "AccountName": "Savings"
+          "AccountType": "Savings",
+          "AccountName": "SBI"
         },
         {
-          "AccountName": "Current"
+          "AccountType": "Current",
+          "AccountName": "HDFC"
         }
       ]
     },
@@ -31,10 +35,12 @@
       "Created": "2021-02-04",
       "Accounts": [
         {
-          "AccountName": "Savings"
+          "AccountType": "Savings",
+          "AccountName": "SBI"
         },
         {
-          "AccountName": "Current"
+          "AccountType": "Current",
+          "AccountName": "HDFC"
         }
       ]
     },
@@ -44,10 +50,12 @@
       "Created": "2021-03-28",
       "Accounts": [
         {
-          "AccountName": "Savings"
+          "AccountType": "Savings",
+          "AccountName": "SBI"
         },
         {
-          "AccountName": "Current"
+          "AccountType": "Current",
+          "AccountName": "HDFC"
         }
       ]
     },
@@ -57,10 +65,12 @@
       "Created": "2021-02-17",
       "Accounts": [
         {
-          "AccountName": "Savings"
+          "AccountType": "Savings",
+          "AccountName": "SBI"
         },
         {
-          "AccountName": "Current"
+          "AccountType": "Current",
+          "AccountName": "HDFC"
         }
       ]
     }

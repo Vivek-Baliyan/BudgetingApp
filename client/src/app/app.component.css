@@ -3,7 +3,7 @@ ng-sidebar-container {
 }
 
 ::ng-deep .ng-sidebar {
-  width: 280px;
+  width: 250px;
   padding: 2rem 3rem;
 }
 

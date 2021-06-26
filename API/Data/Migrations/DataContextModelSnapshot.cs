@@ -25,6 +25,9 @@ namespace API.Data.Migrations
                     b.Property<string>("AccountName")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("AccountType")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 

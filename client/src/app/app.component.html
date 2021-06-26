@@ -7,7 +7,14 @@
   >
     <a
       routerLink="/"
-      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+      class="
+        d-flex
+        align-items-center
+        mb-3 mb-md-0
+        me-md-auto
+        link-dark
+        text-decoration-none
+      "
     >
       <span class="fs-4">Budget App</span>
     </a>
@@ -62,6 +69,9 @@
 
   <!-- Page content -->
   <div ng-sidebar-content>
+    <ngx-spinner>
+      <h3>Loading...</h3>
+    </ngx-spinner>
     <router-outlet></router-outlet>
   </div>
 </ng-sidebar-container>

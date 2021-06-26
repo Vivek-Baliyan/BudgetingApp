@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210509163935_AccountEntity")]
+    [Migration("20210626192046_AccountEntity")]
     partial class AccountEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,9 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AccountName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AccountType")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("AppUserId")

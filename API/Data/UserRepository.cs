@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -18,10 +19,10 @@ namespace API.Data
             _mapper = mapper;
             _context = context;
         }
-        public async Task<MemberDto> GetMemberByIdAsync(int id)
+        public async Task<List<AccountDto>> GetAccountsByUserIdAsync(int id)
         {
-            return await _context.Users.Where(x => x.Id == id)
-            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();
+            return await _context.Accounts.Where(x => x.AppUserId == id)
+            .ProjectTo<AccountDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
         public async Task<bool> SaveAllAsync()
         {

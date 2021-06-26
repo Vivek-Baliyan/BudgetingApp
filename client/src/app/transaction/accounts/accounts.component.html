@@ -1,1 +1,58 @@
-<p>accounts works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form
+        [formGroup]="accountForm"
+        (ngSubmit)="accountForm.valid && save()"
+        autocomplete="off"
+        class="text-center mt-2"        
+      >
+        <app-text-inputs
+          [formControl]="accountForm.controls['accountType']"
+          [label]="'Account Type'"
+        ></app-text-inputs>
+        <app-text-inputs
+          [formControl]="accountForm.controls['accountName']"
+          [label]="'Account Name'"
+        ></app-text-inputs>
+        <app-text-inputs
+          [formControl]="accountForm.controls['openingBalance']"
+          [label]="'Opening Balance'"
+        >
+        </app-text-inputs>
+        <div class="form-group text-center">
+          <button
+            class="btn btn-success mr-2"
+            type="submit"
+            [disabled]="!accountForm.valid"
+          >
+            Save
+          </button>
+          <button class="btn btn-light mr-2" (click)="cancel()" type="button">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-12">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Account Type</th>
+            <th>Account Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ account.accountType }}</td>
+            <td>{{ account.accountName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
