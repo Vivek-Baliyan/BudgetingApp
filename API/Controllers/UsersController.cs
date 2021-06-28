@@ -26,13 +26,14 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<AccountDto>>> GetAccountsByUserId(int id)
+        public async Task<ActionResult<IEnumerable<AccountDto>>> GetAccountsByUserId(int id)
         {
-            return await _userRepository.GetAccountsByUserIdAsync(id);
+            var accounts = await _userRepository.GetAccountsByUserIdAsync(id);
+            return Ok(accounts);
         }
 
         [HttpPost("saveAccount")]
-        public async Task<ActionResult<List<AccountDto>>> SaveAccount(AccountDto accountDto)
+        public async Task<ActionResult<IEnumerable<AccountDto>>> SaveAccount(AccountDto accountDto)
         {
             string accountName = accountDto.AccountName.ToLower();
             if (await UserExists(accountName, accountDto.AppUserId)) return BadRequest("Account already exists");
@@ -51,7 +52,7 @@ namespace API.Controllers
 
             if (await _userRepository.SaveAllAsync())
             {
-                return await _userRepository.GetAccountsByUserIdAsync(accountDto.AppUserId);
+                return await GetAccountsByUserId(accountDto.AppUserId);
             }
             return BadRequest("Problem adding account");
         }

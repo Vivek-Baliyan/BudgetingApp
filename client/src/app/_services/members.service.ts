@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Account } from '../_models/account';
-import { Member } from '../_models/member';
 
 @Injectable({
   providedIn: 'root',

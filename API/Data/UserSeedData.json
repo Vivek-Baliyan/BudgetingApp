@@ -1,77 +1,157 @@
 [
-    {
-      "UserName": "Cobb",
-      "KnownAs": "Cobb",
-      "Created": "2021-03-08",
-      "Accounts": [
-        {
-          "AccountType": "Savings",
-          "AccountName": "SBI"
-        },
-        {
-          "AccountType": "Current",
-          "AccountName": "HDFC"
-        }
-      ]
-    },
-    {
-      "UserName": "Langley",
-      "KnownAs": "Langley",
-      "Created": "2021-04-28",
-      "Accounts": [
-        {
-          "AccountType": "Savings",
-          "AccountName": "SBI"
-        },
-        {
-          "AccountType": "Current",
-          "AccountName": "HDFC"
-        }
-      ]
-    },
-    {
-      "UserName": "Ila",
-      "KnownAs": "Ila",
-      "Created": "2021-02-04",
-      "Accounts": [
-        {
-          "AccountType": "Savings",
-          "AccountName": "SBI"
-        },
-        {
-          "AccountType": "Current",
-          "AccountName": "HDFC"
-        }
-      ]
-    },
-    {
-      "UserName": "Kayla",
-      "KnownAs": "Kayla",
-      "Created": "2021-03-28",
-      "Accounts": [
-        {
-          "AccountType": "Savings",
-          "AccountName": "SBI"
-        },
-        {
-          "AccountType": "Current",
-          "AccountName": "HDFC"
-        }
-      ]
-    },
-    {
-      "UserName": "Farrell",
-      "KnownAs": "Farrell",
-      "Created": "2021-02-17",
-      "Accounts": [
-        {
-          "AccountType": "Savings",
-          "AccountName": "SBI"
-        },
-        {
-          "AccountType": "Current",
-          "AccountName": "HDFC"
-        }
-      ]
-    }
-  ]
+  {
+    "UserName": "Cobb",
+    "KnownAs": "Cobb",
+    "Created": "2021-03-08",
+    "Accounts": [
+      {
+        "AccountType": "Savings",
+        "AccountName": "SBI"
+      },
+      {
+        "AccountType": "Current",
+        "AccountName": "HDFC"
+      }
+    ],
+    "MasterCategories": [
+      {
+        "CategoryName": "Immediate Obligations",
+        "SubCatogories": [
+          { "CategoryName": "Rent" },
+          { "CategoryName": "Electric" }
+        ]
+      },
+      {
+        "CategoryName": "True Expenses",
+        "SubCatogories": [
+          { "CategoryName": "Medical" },
+          { "CategoryName": "Subscriptions" }
+        ]
+      }
+    ]
+  },
+  {
+    "UserName": "Langley",
+    "KnownAs": "Langley",
+    "Created": "2021-04-28",
+    "Accounts": [
+      {
+        "AccountType": "Savings",
+        "AccountName": "SBI"
+      },
+      {
+        "AccountType": "Current",
+        "AccountName": "HDFC"
+      }
+    ],
+    "MasterCategories": [
+      {
+        "CategoryName": "Immediate Obligations",
+        "SubCatogories": [
+          { "CategoryName": "Rent" },
+          { "CategoryName": "Electric" }
+        ]
+      },
+      {
+        "CategoryName": "True Expenses",
+        "SubCatogories": [
+          { "CategoryName": "Medical" },
+          { "CategoryName": "Subscriptions" }
+        ]
+      }
+    ]
+  },
+  {
+    "UserName": "Ila",
+    "KnownAs": "Ila",
+    "Created": "2021-02-04",
+    "Accounts": [
+      {
+        "AccountType": "Savings",
+        "AccountName": "SBI"
+      },
+      {
+        "AccountType": "Current",
+        "AccountName": "HDFC"
+      }
+    ],
+    "MasterCategories": [
+      {
+        "CategoryName": "Immediate Obligations",
+        "SubCatogories": [
+          { "CategoryName": "Rent" },
+          { "CategoryName": "Electric" }
+        ]
+      },
+      {
+        "CategoryName": "True Expenses",
+        "SubCatogories": [
+          { "CategoryName": "Medical" },
+          { "CategoryName": "Subscriptions" }
+        ]
+      }
+    ]
+  },
+  {
+    "UserName": "Kayla",
+    "KnownAs": "Kayla",
+    "Created": "2021-03-28",
+    "Accounts": [
+      {
+        "AccountType": "Savings",
+        "AccountName": "SBI"
+      },
+      {
+        "AccountType": "Current",
+        "AccountName": "HDFC"
+      }
+    ],
+    "MasterCategories": [
+      {
+        "CategoryName": "Immediate Obligations",
+        "SubCatogories": [
+          { "CategoryName": "Rent" },
+          { "CategoryName": "Electric" }
+        ]
+      },
+      {
+        "CategoryName": "True Expenses",
+        "SubCatogories": [
+          { "CategoryName": "Medical" },
+          { "CategoryName": "Subscriptions" }
+        ]
+      }
+    ]
+  },
+  {
+    "UserName": "Farrell",
+    "KnownAs": "Farrell",
+    "Created": "2021-02-17",
+    "Accounts": [
+      {
+        "AccountType": "Savings",
+        "AccountName": "SBI"
+      },
+      {
+        "AccountType": "Current",
+        "AccountName": "HDFC"
+      }
+    ],
+    "MasterCategories": [
+      {
+        "CategoryName": "Immediate Obligations",
+        "SubCatogories": [
+          { "CategoryName": "Rent" },
+          { "CategoryName": "Electric" }
+        ]
+      },
+      {
+        "CategoryName": "True Expenses",
+        "SubCatogories": [
+          { "CategoryName": "Medical" },
+          { "CategoryName": "Subscriptions" }
+        ]
+      }
+    ]
+  }
+]

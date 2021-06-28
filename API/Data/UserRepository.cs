@@ -19,9 +19,9 @@ namespace API.Data
             _mapper = mapper;
             _context = context;
         }
-        public async Task<List<AccountDto>> GetAccountsByUserIdAsync(int id)
+        public async Task<IEnumerable<AccountDto>> GetAccountsByUserIdAsync(int AppUserId)
         {
-            return await _context.Accounts.Where(x => x.AppUserId == id)
+            return await _context.Accounts.Where(x => x.AppUserId == AppUserId)
             .ProjectTo<AccountDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
         public async Task<bool> SaveAllAsync()

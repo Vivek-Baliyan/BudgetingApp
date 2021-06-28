@@ -12,5 +12,6 @@ namespace API.Entities
         public string KnownAs { get; set; }
         public DateTime Created { get; set; }
         public ICollection<Account> Accounts { get; set; }
+        public ICollection<MasterCategory> MasterCategories { get; set; }
     }
 }

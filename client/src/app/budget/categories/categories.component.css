@@ -1,0 +1,10 @@
+.is-master-category {
+  background-color: #f9f8fb;
+  font-size: 16px;
+}
+.is-sub-category {
+  background-color: #fff;
+}
+.cell-collapse {
+  width: 2%;
+}

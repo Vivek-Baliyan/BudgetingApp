@@ -12,11 +12,12 @@ import { SharedModule } from './_modules/shared.module';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
-import { AccountsComponent } from './transaction/accounts/accounts.component';
+import { AccountsComponent } from './budget/accounts/accounts.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { TextInputsComponent } from './_forms/text-inputs/text-inputs.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { CategoriesComponent } from './budget/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     ServerErrorComponent,
     TextInputsComponent,
     DateInputComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,

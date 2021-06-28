@@ -10,6 +10,8 @@ namespace API.Helpers
         {
             CreateMap<AppUser, MemberDto>();
             CreateMap<Account, AccountDto>();
+            CreateMap<MasterCategory, MasterCategoryDto>();
+            CreateMap<SubCategory, SubCategoryDto>();
         }
     }
 }

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryListComponent } from './Budget/category-list/category-list.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { HomeComponent } from './home/home.component';
-import { AccountsComponent } from './transaction/accounts/accounts.component';
+import { AccountsComponent } from './budget/accounts/accounts.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { CategoriesComponent } from './budget/categories/categories.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,11 +14,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      {
-        path: 'budget',
-        component: CategoryListComponent,
-        canActivate: [AuthGuard],
-      },
+      { path: 'categories', component: CategoriesComponent },
       { path: 'accounts', component: AccountsComponent },
     ],
   },

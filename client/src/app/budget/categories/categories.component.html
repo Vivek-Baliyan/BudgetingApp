@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-12">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th class="cell-collapse"></th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let category of categories"
+            [ngClass]="
+              category.isSubCategory ? 'is-sub-category' : 'is-master-category'
+            "
+          >
+            <td class="cell-collapse">
+              <i *ngIf="!category.isSubCategory" class="fa fa-caret-down"></i>
+            </td>
+            <td>{{ category.categoryName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
