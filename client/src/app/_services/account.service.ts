@@ -20,7 +20,10 @@ export class AccountService {
     return this.http.get<AccountType[]>(this.baseUrl + 'account/types');
   }
 
-  saveAccount(account: Account) {
-    return this.http.post(this.baseUrl + 'account/saveAccount', account);
+  save(account: Account) {
+    return this.http.post(this.baseUrl + 'account/save', account);
+  }
+  update(account: Account) {
+    return this.http.put(this.baseUrl + 'account/update', account);
   }
 }

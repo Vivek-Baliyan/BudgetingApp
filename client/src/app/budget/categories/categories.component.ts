@@ -14,7 +14,7 @@ import { UsersService } from 'src/app/_services/users.service';
 })
 export class CategoriesComponent implements OnInit {
   user: User;
-  @Output() cancelCategory = new EventEmitter();
+  @Output() cancelSave = new EventEmitter();
   categoryForm: FormGroup;
 
   categories: any[] = [];
@@ -50,6 +50,7 @@ export class CategoriesComponent implements OnInit {
         .subscribe(
           (masterCategories: MasterCategory[]) => {
             this.categories = this.flattenCategories(masterCategories);
+            this.initializeForm();
           },
           (error) => {
             console.log(error);
@@ -60,6 +61,7 @@ export class CategoriesComponent implements OnInit {
       this.categoryService.saveSub(this.categoryForm.value).subscribe(
         (masterCategories: MasterCategory[]) => {
           this.categories = this.flattenCategories(masterCategories);
+          this.initializeForm();
         },
         (error) => {
           console.log(error);
@@ -69,7 +71,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   cancel() {
-    this.cancelCategory.emit(false);
+    this.initializeForm();
+    this.cancelSave.emit(false);
   }
 
   loadCategories() {

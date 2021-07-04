@@ -24,7 +24,7 @@ namespace API.Controllers
             _mapper = mapper;
             _accountRepository = accountRepository;
         }
-        
+
         [HttpGet("types")]
         public async Task<ActionResult<IEnumerable<AccountType>>> GetAccountTypess()
         {
@@ -38,7 +38,7 @@ namespace API.Controllers
             return Ok(accounts);
         }
 
-        [HttpPost("saveAccount")]
+        [HttpPost("save")]
         public async Task<ActionResult<IEnumerable<AccountDto>>> SaveAccount(AccountDto accountDto)
         {
             string accountName = accountDto.AccountName.ToLower();
@@ -56,13 +56,31 @@ namespace API.Controllers
 
             user.Accounts.Add(account);
 
+
             if (await _accountRepository.SaveAllAsync())
             {
                 return await GetAccountsByUserId(accountDto.AppUserId);
             }
             return BadRequest("Problem adding account");
         }
+        [HttpPut("update")]
+        public async Task<ActionResult<IEnumerable<AccountDto>>> UpdateAccount(AccountDto accountDto)
+        {
+            var account = await _context.Accounts.SingleOrDefaultAsync(x => x.Id == accountDto.Id);
 
+            if (account == null) return BadRequest("Account not found");
+
+            account.AccountName = accountDto.AccountName;
+            account.AccountTypeId = accountDto.AccountType.Id;
+
+            _accountRepository.Update(account);
+            
+            if (await _accountRepository.SaveAllAsync())
+            {
+                return await GetAccountsByUserId(account.AppUserId);
+            }
+            return BadRequest("Problem updating account");
+        }
         private async Task<bool> AccountExists(string accountName, int appuserid)
         {
             return await _context.Accounts.Where(x => x.AppUserId == appuserid)

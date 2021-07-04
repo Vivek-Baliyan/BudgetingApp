@@ -34,6 +34,7 @@
             <th>#</th>
             <th>Account Type</th>
             <th>Account Name</th>
+            <th class="actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +42,10 @@
             <td>{{ i + 1 }}</td>
             <td>{{ account.accountType.typeName }}</td>
             <td>{{ account.accountName }}</td>
+            <td class="actions">
+              <button class="btn btn-info btn-sm mr-2" (click)="edit(account)"><i class="fa fa-pencil"></i></button>
+              <button class="btn btn-danger btn-sm" (click)="delete(account)"><i class="fa fa-trash"></i></button>
+            </td>
           </tr>
         </tbody>
       </table>

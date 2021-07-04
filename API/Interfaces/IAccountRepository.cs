@@ -7,7 +7,7 @@ namespace API.Interfaces
 {
     public interface IAccountRepository
     {
-        void Update(AppUser user);
+        void Update(Account account);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<AccountDto>> GetAccountsByUserIdAsync(int id);
         Task<IEnumerable<AccountType>> GetAccountTypesAsync();
