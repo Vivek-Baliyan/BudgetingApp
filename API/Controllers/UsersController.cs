@@ -1,66 +1,85 @@
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
         private readonly DataContext _context;
-        public UsersController(DataContext context, IUserRepository userRepository, IMapper mapper)
+        private readonly ITokenService _tokenService;
+        public UsersController(DataContext context, ITokenService tokenService)
         {
+            _tokenService = tokenService;
             _context = context;
-            _mapper = mapper;
-            _userRepository = userRepository;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<AccountDto>>> GetAccountsByUserId(int id)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
-            var accounts = await _userRepository.GetAccountsByUserIdAsync(id);
+            var accounts = await _context.Users.ToListAsync();
             return Ok(accounts);
         }
 
-        [HttpPost("saveAccount")]
-        public async Task<ActionResult<IEnumerable<AccountDto>>> SaveAccount(AccountDto accountDto)
+        [HttpPost("register")]
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            string accountName = accountDto.AccountName.ToLower();
-            if (await UserExists(accountName, accountDto.AppUserId)) return BadRequest("Account already exists");
+            if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
-            var account = new Account
+            using var hmac = new HMACSHA512();
+
+            var user = new AppUser
             {
-                AccountType = accountDto.AccountType,
-                AccountName = accountDto.AccountName
+                UserName = registerDto.Username.ToLower(),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                PasswordSalt = hmac.Key
             };
 
-            var user = await _context.Users
-            .Include(a => a.Accounts)
-            .SingleOrDefaultAsync(x => x.Id == accountDto.AppUserId);
+            _context.Users.Add(user);
 
-            user.Accounts.Add(account);
+            await _context.SaveChangesAsync();
 
-            if (await _userRepository.SaveAllAsync())
+            return new UserDto
             {
-                return await GetAccountsByUserId(accountDto.AppUserId);
-            }
-            return BadRequest("Problem adding account");
+                Username = user.UserName,
+                Token = _tokenService.CreteToken(user)
+            };
         }
 
-        private async Task<bool> UserExists(string accountName, int appuserid)
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            return await _context.Accounts.Where(x => x.AppUserId == appuserid)
-            .AnyAsync(x => x.AccountName.ToLower() == accountName);
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+
+            if (user == null) return Unauthorized("Invalid Username");
+
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password");
+            }
+            return new UserDto
+            {
+                Id = user.Id,
+                Username = user.UserName,
+                Token = _tokenService.CreteToken(user)
+            };
+        }
+
+        private async Task<bool> UserExists(string username)
+        {
+            return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
     }
 }

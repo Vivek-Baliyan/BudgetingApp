@@ -1,8 +1,8 @@
-import { SubCategory } from "./subCategory";
+import { SubCategory } from './subCategory';
 
-export interface MasterCategory
-{
-    id: number,
-    categoryName: string,
-    subCategories: SubCategory[]
+export interface MasterCategory {
+  id: number;
+  categoryName: string;
+  subCategories: SubCategory[];
+  appUserId: number;
 }

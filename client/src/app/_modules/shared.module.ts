@@ -4,6 +4,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,14 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     }),
     NgxSpinnerModule,
     BsDatepickerModule.forRoot(),
+    NgbModule,
   ],
-  exports: [SidebarModule, ToastrModule, NgxSpinnerModule, BsDatepickerModule],
+  exports: [
+    NgbModule,
+    SidebarModule,
+    ToastrModule,
+    NgxSpinnerModule,
+    BsDatepickerModule,
+  ],
 })
 export class SharedModule {}

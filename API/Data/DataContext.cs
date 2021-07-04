@@ -9,6 +9,7 @@ namespace API.Data
         {
         }
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<AccountType> AccountTypes { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<MasterCategory> MasterCategories { get; set; }
     }

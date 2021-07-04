@@ -25,17 +25,33 @@ namespace API.Data.Migrations
                     b.Property<string>("AccountName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("AccountType")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AccountTypeId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountTypeId");
+
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("API.Entities.AccountType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TypeName")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountTypes");
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
@@ -104,11 +120,19 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Account", b =>
                 {
+                    b.HasOne("API.Entities.AccountType", "AccountType")
+                        .WithMany()
+                        .HasForeignKey("AccountTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("API.Entities.AppUser", "AppUser")
                         .WithMany("Accounts")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AccountType");
 
                     b.Navigation("AppUser");
                 });
@@ -127,7 +151,7 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.SubCategory", b =>
                 {
                     b.HasOne("API.Entities.MasterCategory", "MasterCategory")
-                        .WithMany("SubCatogories")
+                        .WithMany("SubCategories")
                         .HasForeignKey("MasterCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -144,7 +168,7 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.MasterCategory", b =>
                 {
-                    b.Navigation("SubCatogories");
+                    b.Navigation("SubCategories");
                 });
 #pragma warning restore 612, 618
         }

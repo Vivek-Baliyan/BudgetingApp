@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './_models/user';
-import { AccountService } from './_services/account.service';
+import { UsersService } from './_services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -13,26 +13,26 @@ export class AppComponent implements OnInit {
   opened: boolean = true;
   model: any = {};
 
-  constructor(public accountService: AccountService, private router: Router) {}
+  constructor(public usersService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
   }
 
   login() {
-    this.accountService.login(this.model).subscribe((response) => {
+    this.usersService.login(this.model).subscribe((response) => {
       this.router.navigateByUrl('/budget');
     });
   }
 
   logout() {
-    this.accountService.logout();
+    this.usersService.logout();
     this.router.navigateByUrl('/');
   }
 
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
-    this.accountService.setCurrentUser(user);
+    this.usersService.setCurrentUser(user);
   }
 
   toggleSidebar() {

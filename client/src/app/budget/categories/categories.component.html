@@ -1,27 +1,61 @@
 <div class="container">
-  <div class="row mt-2">
-    <div class="col-12">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th class="cell-collapse"></th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let category of categories"
-            [ngClass]="
-              category.isSubCategory ? 'is-sub-category' : 'is-master-category'
-            "
-          >
-            <td class="cell-collapse">
-              <i *ngIf="!category.isSubCategory" class="fa fa-caret-down"></i>
-            </td>
-            <td>{{ category.categoryName }}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form [formGroup]="categoryForm" (ngSubmit)="categoryForm.valid && save()" autocomplete="off"
+        class="text-center mt-2">
+        <div class="form-group">
+          <select name="categoryType" class="form-control bg-white"
+            [formControl]="categoryForm.controls['categoryType']">
+            <option [value]="0" [disabled]="true">Select type</option>
+            <option [value]="1">Master</option>
+            <option [value]="2">Sub</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="categoryForm.value.categoryType === '2'">
+          <select name="masterCategory" class="form-control bg-white"
+            [formControl]="categoryForm.controls['masterCategoryId']">
+            <option [value]="0" [disabled]="true">Select category</option>
+            <option [value]="masterCategory.id" *ngFor="let masterCategory of masterCategories">
+              {{ masterCategory.categoryName }}
+            </option>
+          </select>
+        </div>
+        <app-text-inputs [formControl]="categoryForm.controls['categoryName']" [label]="'Category Name'">
+        </app-text-inputs>
+
+        <div class="form-group text-center">
+          <button class="btn btn-success mr-2" type="submit" [disabled]="!categoryForm.valid">
+            Save
+          </button>
+          <button class="btn btn-light mr-2" (click)="cancel()" type="button">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th class="cell-collapse"></th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories" [ngClass]="
+                category.isSubCategory
+                  ? 'is-sub-category'
+                  : 'is-master-category'
+              ">
+              <td class="cell-collapse">
+                <i *ngIf="!category.isSubCategory" class="fa fa-caret-down"></i>
+              </td>
+              <td>{{ category.categoryName }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

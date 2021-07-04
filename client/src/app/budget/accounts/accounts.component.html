@@ -1,31 +1,22 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-4">
-      <form
-        [formGroup]="accountForm"
-        (ngSubmit)="accountForm.valid && save()"
-        autocomplete="off"
-        class="text-center mt-2"        
-      >
-        <app-text-inputs
-          [formControl]="accountForm.controls['accountType']"
-          [label]="'Account Type'"
-        ></app-text-inputs>
-        <app-text-inputs
-          [formControl]="accountForm.controls['accountName']"
-          [label]="'Account Name'"
-        ></app-text-inputs>
-        <app-text-inputs
-          [formControl]="accountForm.controls['openingBalance']"
-          [label]="'Opening Balance'"
-        >
+      <form [formGroup]="accountForm" (ngSubmit)="accountForm.valid && save()" autocomplete="off"
+        class="text-center mt-2">
+        <div class="form-group">
+          <select name="accountType" class="form-control bg-white"
+            [formControl]="accountForm.controls['accountTypeId']">
+            <option [value]="0" [disabled]="true">Select type</option>
+            <option [value]="type.id" *ngFor="let type of accountTypes">
+              {{ type.typeName }}
+            </option>
+          </select>
+        </div>
+        <app-text-inputs [formControl]="accountForm.controls['accountName']" [label]="'Account Name'"></app-text-inputs>
+        <app-text-inputs [formControl]="accountForm.controls['openingBalance']" [label]="'Opening Balance'">
         </app-text-inputs>
         <div class="form-group text-center">
-          <button
-            class="btn btn-success mr-2"
-            type="submit"
-            [disabled]="!accountForm.valid"
-          >
+          <button class="btn btn-success mr-2" type="submit" [disabled]="!accountForm.valid">
             Save
           </button>
           <button class="btn btn-light mr-2" (click)="cancel()" type="button">
@@ -48,7 +39,7 @@
         <tbody>
           <tr *ngFor="let account of accounts; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ account.accountType }}</td>
+            <td>{{ account.accountType.typeName }}</td>
             <td>{{ account.accountName }}</td>
           </tr>
         </tbody>

@@ -6,13 +6,13 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AccountService } from '../_services/account.service';
 import { User } from '../_models/user';
 import { take } from 'rxjs/operators';
+import { UsersService } from '../_services/users.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private accountService: AccountService) {}
+  constructor(private usersService: UsersService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -20,7 +20,7 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     let currentUser: User;
 
-    this.accountService.currentUser$
+    this.usersService.currentUser$
       .pipe(take(1))
       .subscribe((user) => (currentUser = user));
 

@@ -5,25 +5,25 @@
     "Created": "2021-03-08",
     "Accounts": [
       {
-        "AccountType": "Savings",
+        "AccountTypeId": 1,
         "AccountName": "SBI"
       },
       {
-        "AccountType": "Current",
+        "AccountTypeId": 2,
         "AccountName": "HDFC"
       }
     ],
     "MasterCategories": [
       {
         "CategoryName": "Immediate Obligations",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Rent" },
           { "CategoryName": "Electric" }
         ]
       },
       {
         "CategoryName": "True Expenses",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Medical" },
           { "CategoryName": "Subscriptions" }
         ]
@@ -36,25 +36,25 @@
     "Created": "2021-04-28",
     "Accounts": [
       {
-        "AccountType": "Savings",
+        "AccountTypeId": 1,
         "AccountName": "SBI"
       },
       {
-        "AccountType": "Current",
+        "AccountTypeId": 2,
         "AccountName": "HDFC"
       }
     ],
     "MasterCategories": [
       {
         "CategoryName": "Immediate Obligations",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Rent" },
           { "CategoryName": "Electric" }
         ]
       },
       {
         "CategoryName": "True Expenses",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Medical" },
           { "CategoryName": "Subscriptions" }
         ]
@@ -67,25 +67,25 @@
     "Created": "2021-02-04",
     "Accounts": [
       {
-        "AccountType": "Savings",
+        "AccountTypeId": 1,
         "AccountName": "SBI"
       },
       {
-        "AccountType": "Current",
+        "AccountTypeId": 2,
         "AccountName": "HDFC"
       }
     ],
     "MasterCategories": [
       {
         "CategoryName": "Immediate Obligations",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Rent" },
           { "CategoryName": "Electric" }
         ]
       },
       {
         "CategoryName": "True Expenses",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Medical" },
           { "CategoryName": "Subscriptions" }
         ]
@@ -98,25 +98,25 @@
     "Created": "2021-03-28",
     "Accounts": [
       {
-        "AccountType": "Savings",
+        "AccountTypeId": 1,
         "AccountName": "SBI"
       },
       {
-        "AccountType": "Current",
+        "AccountTypeId": 2,
         "AccountName": "HDFC"
       }
     ],
     "MasterCategories": [
       {
         "CategoryName": "Immediate Obligations",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Rent" },
           { "CategoryName": "Electric" }
         ]
       },
       {
         "CategoryName": "True Expenses",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Medical" },
           { "CategoryName": "Subscriptions" }
         ]
@@ -129,25 +129,25 @@
     "Created": "2021-02-17",
     "Accounts": [
       {
-        "AccountType": "Savings",
+        "AccountTypeId": 1,
         "AccountName": "SBI"
       },
       {
-        "AccountType": "Current",
+        "AccountTypeId": 2,
         "AccountName": "HDFC"
       }
     ],
     "MasterCategories": [
       {
         "CategoryName": "Immediate Obligations",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Rent" },
           { "CategoryName": "Electric" }
         ]
       },
       {
         "CategoryName": "True Expenses",
-        "SubCatogories": [
+        "SubCategories": [
           { "CategoryName": "Medical" },
           { "CategoryName": "Subscriptions" }
         ]

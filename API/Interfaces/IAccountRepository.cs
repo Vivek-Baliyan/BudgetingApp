@@ -5,10 +5,11 @@ using API.Entities;
 
 namespace API.Interfaces
 {
-    public interface IUserRepository
+    public interface IAccountRepository
     {
         void Update(AppUser user);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<AccountDto>> GetAccountsByUserIdAsync(int id);
+        Task<IEnumerable<AccountType>> GetAccountTypesAsync();
     }
 }

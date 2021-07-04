@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class UserRepository : IUserRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public UserRepository(DataContext context, IMapper mapper)
+        public AccountRepository(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;
@@ -24,6 +24,12 @@ namespace API.Data
             return await _context.Accounts.Where(x => x.AppUserId == AppUserId)
             .ProjectTo<AccountDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
+
+        public async Task<IEnumerable<AccountType>> GetAccountTypesAsync()
+        {
+            return await _context.AccountTypes.ToListAsync();
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
