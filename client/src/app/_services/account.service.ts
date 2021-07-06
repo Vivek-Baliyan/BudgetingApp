@@ -12,8 +12,8 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
-  getAccounts(id: number) {
-    return this.http.get<Account[]>(this.baseUrl + 'account/' + id);
+  getAccounts(accountId: number) {
+    return this.http.get<Account[]>(this.baseUrl + 'account/' + accountId);
   }
 
   getAccountTypes() {
@@ -23,7 +23,12 @@ export class AccountService {
   save(account: Account) {
     return this.http.post(this.baseUrl + 'account/save', account);
   }
+
   update(account: Account) {
     return this.http.put(this.baseUrl + 'account/update', account);
+  }
+
+  delete(accountId: number) {
+    return this.http.delete(this.baseUrl + 'account/delete/' + accountId);
   }
 }

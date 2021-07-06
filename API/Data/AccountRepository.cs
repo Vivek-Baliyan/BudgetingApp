@@ -30,6 +30,12 @@ namespace API.Data
             return await _context.AccountTypes.ToListAsync();
         }
 
+        public async Task<AppUser> GetUserByIdAsync(int id)
+        {
+            return await _context.Users.Include(a => a.Accounts)
+            .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
@@ -37,6 +43,11 @@ namespace API.Data
         public void Update(Account account)
         {
             _context.Entry(account).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        }
+
+        public void Remove(Account account)
+        {
+            _context.Accounts.Remove(account);
         }
     }
 }

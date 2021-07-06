@@ -6,7 +6,6 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,24 +14,28 @@ namespace API.Controllers
     public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
+        private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
-        public UsersController(DataContext context, ITokenService tokenService)
+        public UsersController(DataContext context,IUserRepository userRepository, ITokenService tokenService)
         {
-            _tokenService = tokenService;
             _context = context;
+            _userRepository = userRepository;
+            _tokenService = tokenService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
-            var accounts = await _context.Users.ToListAsync();
-            return Ok(accounts);
+            var users = await GetUsers();
+            return Ok(users);
         }
 
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
+
+            
 
             using var hmac = new HMACSHA512();
 

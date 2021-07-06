@@ -10,6 +10,7 @@ namespace API.Interfaces
         void Update(Account account);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<AccountDto>> GetAccountsByUserIdAsync(int id);
+        Task<AppUser> GetUserByIdAsync(int id);
         Task<IEnumerable<AccountType>> GetAccountTypesAsync();
     }
 }

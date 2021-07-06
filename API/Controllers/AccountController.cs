@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -17,10 +16,8 @@ namespace API.Controllers
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
-        private readonly DataContext _context;
-        public AccountController(DataContext context, IAccountRepository accountRepository, IMapper mapper)
+        public AccountController(IAccountRepository accountRepository, IMapper mapper)
         {
-            _context = context;
             _mapper = mapper;
             _accountRepository = accountRepository;
         }
@@ -50,9 +47,7 @@ namespace API.Controllers
                 AccountName = accountDto.AccountName
             };
 
-            var user = await _context.Users
-            .Include(a => a.Accounts)
-            .SingleOrDefaultAsync(x => x.Id == accountDto.AppUserId);
+            var user = await _accountRepository.GetUserByIdAsync(accountDto.AppUserId);
 
             user.Accounts.Add(account);
 
@@ -66,25 +61,46 @@ namespace API.Controllers
         [HttpPut("update")]
         public async Task<ActionResult<IEnumerable<AccountDto>>> UpdateAccount(AccountDto accountDto)
         {
-            var account = await _context.Accounts.SingleOrDefaultAsync(x => x.Id == accountDto.Id);
+            var user = await _accountRepository.GetUserByIdAsync(accountDto.AppUserId);
 
-            if (account == null) return BadRequest("Account not found");
+            var account = user.Accounts.SingleOrDefault(x => x.Id == accountDto.Id);
+
+            if (account == null) return NotFound();
 
             account.AccountName = accountDto.AccountName;
             account.AccountTypeId = accountDto.AccountType.Id;
 
             _accountRepository.Update(account);
-            
+
             if (await _accountRepository.SaveAllAsync())
             {
                 return await GetAccountsByUserId(account.AppUserId);
             }
             return BadRequest("Problem updating account");
         }
-        private async Task<bool> AccountExists(string accountName, int appuserid)
+
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult> DeleteAccount(int id)
         {
-            return await _context.Accounts.Where(x => x.AppUserId == appuserid)
-            .AnyAsync(x => x.AccountName.ToLower() == accountName);
+            var user = await _accountRepository.GetUserByIdAsync(User.GetUserId());
+
+            var account = user.Accounts.SingleOrDefault(x => x.Id == id);
+
+            if (account == null) return NotFound();
+
+            user.Accounts.Remove(account);
+
+            if (await _accountRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to delete the account");
+
+        }
+
+        private async Task<bool> AccountExists(string AccountName, int AppUserId)
+        {
+            var user = await _accountRepository.GetUserByIdAsync(AppUserId);
+
+            return user.Accounts.Any(x => x.AccountName == AccountName);
         }
     }
 }

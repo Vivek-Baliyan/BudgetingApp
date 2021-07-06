@@ -68,13 +68,15 @@ export class AccountsComponent implements OnInit {
         }
       );
     } else {
-      this.accountService.update(account).subscribe((accounts: Account[]) => {
-        this.accounts = accounts;
-        this.initializeForm();
-      },
-      (error) => {
-        console.log(error);
-      });
+      this.accountService.update(account).subscribe(
+        (accounts: Account[]) => {
+          this.accounts = accounts;
+          this.initializeForm();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
 
@@ -86,7 +88,18 @@ export class AccountsComponent implements OnInit {
       openingBalance: 0,
     });
   }
-  delete(account: Account) {}
+
+  delete(accountId: number) {
+    this.accountService.delete(accountId).subscribe(
+      () => {
+        this.accounts = this.accounts.filter((x) => x.id != accountId);
+        this.toastr.success('Account deleted successfully');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   cancel() {
     this.initializeForm();
