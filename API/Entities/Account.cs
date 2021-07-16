@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
@@ -11,5 +12,6 @@ namespace API.Entities
         public AccountType AccountType { get; set; }
         public int AppUserId { get; set; }
         public int AccountTypeId { get; set; }
+        public ICollection<AccountTransaction> Transactions { get; set; }
     }
 }

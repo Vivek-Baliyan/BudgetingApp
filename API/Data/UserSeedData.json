@@ -6,11 +6,13 @@
     "Accounts": [
       {
         "AccountTypeId": 1,
-        "AccountName": "SBI"
+        "AccountName": "SBI",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       },
       {
         "AccountTypeId": 2,
-        "AccountName": "HDFC"
+        "AccountName": "HDFC",
+        "Transactions": [{ "Payee": "Wifi", "DebitAmount": 100 }]
       }
     ],
     "MasterCategories": [
@@ -37,11 +39,13 @@
     "Accounts": [
       {
         "AccountTypeId": 1,
-        "AccountName": "SBI"
+        "AccountName": "SBI",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       },
       {
         "AccountTypeId": 2,
-        "AccountName": "HDFC"
+        "AccountName": "HDFC",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       }
     ],
     "MasterCategories": [
@@ -68,11 +72,13 @@
     "Accounts": [
       {
         "AccountTypeId": 1,
-        "AccountName": "SBI"
+        "AccountName": "SBI",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       },
       {
         "AccountTypeId": 2,
-        "AccountName": "HDFC"
+        "AccountName": "HDFC",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       }
     ],
     "MasterCategories": [
@@ -99,11 +105,13 @@
     "Accounts": [
       {
         "AccountTypeId": 1,
-        "AccountName": "SBI"
+        "AccountName": "SBI",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       },
       {
         "AccountTypeId": 2,
-        "AccountName": "HDFC"
+        "AccountName": "HDFC",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       }
     ],
     "MasterCategories": [
@@ -130,11 +138,13 @@
     "Accounts": [
       {
         "AccountTypeId": 1,
-        "AccountName": "SBI"
+        "AccountName": "SBI",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       },
       {
         "AccountTypeId": 2,
-        "AccountName": "HDFC"
+        "AccountName": "HDFC",
+        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
       }
     ],
     "MasterCategories": [

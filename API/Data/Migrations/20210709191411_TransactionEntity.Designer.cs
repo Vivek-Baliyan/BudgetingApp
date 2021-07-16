@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210709191411_TransactionEntity")]
+    partial class TransactionEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,31 +40,6 @@ namespace API.Data.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Accounts");
-                });
-
-            modelBuilder.Entity("API.Entities.AccountTransaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("CreditAmount")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("DebitAmount")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Payee")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("API.Entities.AccountType", b =>
@@ -143,6 +120,28 @@ namespace API.Data.Migrations
                     b.ToTable("SubCategories");
                 });
 
+            modelBuilder.Entity("API.Entities.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Payee")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("API.Entities.Account", b =>
                 {
                     b.HasOne("API.Entities.AccountType", "AccountType")
@@ -160,17 +159,6 @@ namespace API.Data.Migrations
                     b.Navigation("AccountType");
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("API.Entities.AccountTransaction", b =>
-                {
-                    b.HasOne("API.Entities.Account", "Account")
-                        .WithMany("Transactions")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("API.Entities.MasterCategory", b =>
@@ -193,6 +181,17 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("MasterCategory");
+                });
+
+            modelBuilder.Entity("API.Entities.Transaction", b =>
+                {
+                    b.HasOne("API.Entities.Account", "Account")
+                        .WithMany("Transactions")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("API.Entities.Account", b =>

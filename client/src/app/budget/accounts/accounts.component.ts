@@ -56,6 +56,7 @@ export class AccountsComponent implements OnInit {
         id: this.accountForm.value.accountTypeId,
         typeName: '',
       },
+      transactions: [],
     };
     if (account.id === 0) {
       this.accountService.save(account).subscribe(

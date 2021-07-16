@@ -18,6 +18,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { TextInputsComponent } from './_forms/text-inputs/text-inputs.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { CategoriesComponent } from './budget/categories/categories.component';
+import { TransactionComponent } from './budget/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CategoriesComponent } from './budget/categories/categories.component';
     TextInputsComponent,
     DateInputComponent,
     CategoriesComponent,
+    TransactionComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,5 +12,6 @@ namespace API.Data
         public DbSet<AccountType> AccountTypes { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<MasterCategory> MasterCategories { get; set; }
+        public DbSet<AccountTransaction> Transactions { get; set; }
     }
 }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210704133225_AccountType")]
-    partial class AccountType
+    [Migration("20210716200447_TransactionUpdate")]
+    partial class TransactionUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,14 +42,39 @@ namespace API.Data.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("API.Entities.AccountTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("CreditAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("DebitAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Payee")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("API.Entities.AccountType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TypeName")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("TypeName")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -139,6 +164,17 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("API.Entities.AccountTransaction", b =>
+                {
+                    b.HasOne("API.Entities.Account", "Account")
+                        .WithMany("Transactions")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("API.Entities.MasterCategory", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
@@ -159,6 +195,11 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("MasterCategory");
+                });
+
+            modelBuilder.Entity("API.Entities.Account", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>

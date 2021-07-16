@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AccountsComponent } from './budget/accounts/accounts.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { CategoriesComponent } from './budget/categories/categories.component';
+import { TransactionComponent } from './budget/transactions/transactions.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'categories', component: CategoriesComponent },
       { path: 'accounts', component: AccountsComponent },
+      { path: 'transactions', component: TransactionComponent },
     ],
   },
   { path: 'not-found', component: NotFoundComponent },

@@ -12,6 +12,8 @@ namespace API.Helpers
             CreateMap<Account, AccountDto>();
             CreateMap<MasterCategory, MasterCategoryDto>();
             CreateMap<SubCategory, SubCategoryDto>();
+            CreateMap<AccountTransaction, TransactionDto>()
+            .ForMember(dest => dest.AccountName, opts => opts.MapFrom(src => src.Account.AccountName));
         }
     }
 }
