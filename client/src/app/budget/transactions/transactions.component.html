@@ -1,4 +1,68 @@
 <div class="container">
+    <div class="row justify-content-center">
+        <form [formGroup]="transactionForm" (ngSubmit)="transactionForm.valid && save()" autocomplete="off"
+            class="text-center mt-2">
+            <div class="row">
+                <div class="col-3">
+                    <app-date-input [formControl]="transactionForm.controls['date']" [label]="'Transaction Date'">
+                    </app-date-input>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <select name="accountType" class="form-control bg-white"
+                            [formControl]="transactionForm.controls['accountId']">
+                            <option [value]="0" [disabled]="true">Select account</option>
+                            <option [value]="account.id" *ngFor="let account of accounts">
+                                {{ account.accountName }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <app-text-inputs [formControl]="transactionForm.controls['payee']" [label]="'Payee'">
+                    </app-text-inputs>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <select name="accountType" class="form-control bg-white"
+                            [formControl]="transactionForm.controls['categoryId']">
+                            <option [value]="0" [disabled]="true">Select category</option>
+                            <option [value]="category.id" *ngFor="let category of categories"
+                                [disabled]="!category.isSubCategory" [ngClass]="category.isSubCategory ? '': 'master'">
+                                {{
+                                category.categoryName + (category.isSubCategory ? "" : " :")
+                                }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <app-text-inputs [formControl]="transactionForm.controls['memo']" [label]="'Memo'">
+                    </app-text-inputs>
+                </div>
+                <div class="col-3">
+                    <app-text-inputs [formControl]="transactionForm.controls['creditAmount']" [label]="'Inflow'">
+                    </app-text-inputs>
+                </div>
+                <div class="col-3">
+                    <app-text-inputs [formControl]="transactionForm.controls['debitAmount']" [label]="'Outflow'">
+                    </app-text-inputs>
+                </div>
+                <div class="col-3"></div>
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn btn-success mr-2" type="submit" [disabled]="!transactionForm.valid">
+                    Save
+                </button>
+                <button class="btn btn-light mr-2" (click)="cancel()" type="button">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
     <div class="row">
         <div class="col-12">
             <table class="table table-sm">
@@ -15,17 +79,25 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let transaction of transactions">
-                        <td>{{transaction.accountName}}</td>
-                        <td></td>
-                        <td>{{transaction.payee}}</td>
-                        <td></td>
-                        <td></td>
-                        <td>{{transaction.debitAmount}}</td>
-                        <td>{{transaction.creditAmount}}</td>
+                        <td>{{ transaction.accountName }}</td>
+                        <td>{{ transaction.date | date: "shortDate" }}</td>
+                        <td>{{ transaction.payee }}</td>
+                        <td>
+                            {{ transaction.masterCategoryName }} :
+                            {{ transaction.subCategoryName }}
+                        </td>
+                        <td>{{ transaction.memo }}</td>
+                        <td>
+                            {{ transaction.debitAmount === 0 ? "" : transaction.debitAmount }}
+                        </td>
+                        <td>
+                            {{
+                            transaction.creditAmount === 0 ? "" : transaction.creditAmount
+                            }}
+                        </td>
                     </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

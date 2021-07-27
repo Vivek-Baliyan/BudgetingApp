@@ -1,8 +1,13 @@
 export interface Transaction {
-    id: number;
-    payee: string;
-    creditAmount: number;
-    debtAmount: number;
-    accountId: number;
-    accountName: string;
-  }
+  id: number;
+  payee: string;
+  date: Date;
+  memo?: string;
+  creditAmount: number;
+  debitAmount: number;
+  accountId: number;
+  subCategoryId: number;
+  accountName?: string;
+  subCategoryName?: string;
+  masterCategoryName?: string;
+}

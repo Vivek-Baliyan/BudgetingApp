@@ -13,12 +13,18 @@ export class TransactionService {
   constructor(private http: HttpClient) {}
 
   getTransactions(appUserId: number) {
-    return this.http.get<Transaction[]>(this.baseUrl + 'transactions/' + appUserId);
+    return this.http.get<Transaction[]>(
+      this.baseUrl + 'transactions/' + appUserId
+    );
   }
 
   getTransactionByAccountId(accountId: number) {
     return this.http.get<Transaction[]>(
       this.baseUrl + 'transactions/' + accountId
     );
+  }
+
+  save(transaction) {
+    return this.http.post(this.baseUrl + 'transactions/save', transaction);
   }
 }

@@ -12,8 +12,8 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
-  getAccounts(accountId: number) {
-    return this.http.get<Account[]>(this.baseUrl + 'account/' + accountId);
+  getAccounts(appUserId: number) {
+    return this.http.get<Account[]>(this.baseUrl + 'account/' + appUserId);
   }
 
   getAccountTypes() {

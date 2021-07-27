@@ -1,5 +1,5 @@
-import { AccountType } from "./accountType";
-import { Transaction } from "./transaction";
+import { AccountType } from './accountType';
+import { Transaction } from './transaction';
 
 export interface Account {
   id: number;

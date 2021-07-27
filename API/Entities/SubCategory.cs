@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
@@ -9,5 +10,6 @@ namespace API.Entities
         public string CategoryName { get; set; }
         public MasterCategory MasterCategory { get; set; }
         public int MasterCategoryId { get; set; }
+        public ICollection<AccountTransaction> Transactions { get; set; }
     }
 }

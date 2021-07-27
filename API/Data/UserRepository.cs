@@ -22,7 +22,8 @@ namespace API.Data
 
         public async Task<AppUser> GetUserById(int AppUserId)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.Id == AppUserId);
+            return await _context.Users
+            .SingleOrDefaultAsync(x => x.Id == AppUserId);
         }
 
         public async Task<IEnumerable<MemberDto>> GetUsers()

@@ -9,6 +9,6 @@ namespace API.Interfaces
     {
         Task<bool> SaveAllAsync();
         Task<IEnumerable<MemberDto>> GetUsers();
-        Task<AppUser> GetUserById(int AppUserId);
+        Task<AppUser> GetUserById(int id);
     }
 }

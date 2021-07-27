@@ -22,12 +22,10 @@ namespace API.Data
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<TransactionDto>> GetTransactionsByAccountIdAsync(int id)
+        public async Task<Account> GetTransactionsByAccountIdAsync(int id)
         {
-            return await _context.Transactions
-            .ProjectTo<TransactionDto>(_mapper.ConfigurationProvider)
-            .Where(x => x.AccountId == id)
-            .ToListAsync();
+            return await _context.Accounts.Include(x => x.Transactions)
+            .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<TransactionDto>> GetTransactionsAsync(int appUserId)

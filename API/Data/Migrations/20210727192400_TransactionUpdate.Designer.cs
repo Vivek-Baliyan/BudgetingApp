@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210716200447_TransactionUpdate")]
+    [Migration("20210727192400_TransactionUpdate")]
     partial class TransactionUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,15 +54,26 @@ namespace API.Data.Migrations
                     b.Property<decimal>("CreditAmount")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("DebitAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Memo")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Payee")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("Transactions");
                 });
@@ -172,7 +183,13 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("API.Entities.SubCategory", "SubCategory")
+                        .WithMany("Transactions")
+                        .HasForeignKey("SubCategoryId");
+
                     b.Navigation("Account");
+
+                    b.Navigation("SubCategory");
                 });
 
             modelBuilder.Entity("API.Entities.MasterCategory", b =>
@@ -212,6 +229,11 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.MasterCategory", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("API.Entities.SubCategory", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

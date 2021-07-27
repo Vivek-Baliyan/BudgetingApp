@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
@@ -41,27 +43,36 @@ namespace API.Controllers
             string accountName = accountDto.AccountName.ToLower();
             if (await AccountExists(accountName, accountDto.AppUserId)) return BadRequest("Account already exists");
 
+            ICollection<AccountTransaction> transactions = new List<AccountTransaction>();
+            transactions.Add(new AccountTransaction
+            {
+                Date = DateTime.Now,
+                Payee = "Starting Balance",
+                CreditAmount = accountDto.Transactions.FirstOrDefault().CreditAmount,
+                DebitAmount = 0
+            });
+            
             var account = new Account
             {
                 AccountTypeId = accountDto.AccountType.Id,
-                AccountName = accountDto.AccountName
+                AccountName = accountDto.AccountName,
+                Transactions = transactions
             };
 
-            var user = await _accountRepository.GetUserByIdAsync(accountDto.AppUserId);
+            var user = await _accountRepository.GetUserAccounts(accountDto.AppUserId);
 
             user.Accounts.Add(account);
 
-
             if (await _accountRepository.SaveAllAsync())
             {
-                return await GetAccountsByUserId(accountDto.AppUserId);
+                return await GetAccountsByUserId(account.AppUserId);
             }
             return BadRequest("Problem adding account");
         }
         [HttpPut("update")]
         public async Task<ActionResult<IEnumerable<AccountDto>>> UpdateAccount(AccountDto accountDto)
         {
-            var user = await _accountRepository.GetUserByIdAsync(accountDto.AppUserId);
+            var user = await _accountRepository.GetUserAccounts(accountDto.AppUserId);
 
             var account = user.Accounts.SingleOrDefault(x => x.Id == accountDto.Id);
 
@@ -82,7 +93,7 @@ namespace API.Controllers
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult> DeleteAccount(int id)
         {
-            var user = await _accountRepository.GetUserByIdAsync(User.GetUserId());
+            var user = await _accountRepository.GetUserAccounts(User.GetUserId());
 
             var account = user.Accounts.SingleOrDefault(x => x.Id == id);
 
@@ -98,7 +109,7 @@ namespace API.Controllers
 
         private async Task<bool> AccountExists(string AccountName, int AppUserId)
         {
-            var user = await _accountRepository.GetUserByIdAsync(AppUserId);
+            var user = await _accountRepository.GetUserAccounts(AppUserId);
 
             return user.Accounts.Any(x => x.AccountName == AccountName);
         }

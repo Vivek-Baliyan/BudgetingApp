@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210709191411_TransactionEntity")]
+    [Migration("20210724045301_TransactionEntity")]
     partial class TransactionEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,42 @@ namespace API.Data.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("API.Entities.AccountTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("CreditAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("DebitAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Memo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Payee")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("API.Entities.AccountType", b =>
@@ -120,28 +156,6 @@ namespace API.Data.Migrations
                     b.ToTable("SubCategories");
                 });
 
-            modelBuilder.Entity("API.Entities.Transaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Payee")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("Transactions");
-                });
-
             modelBuilder.Entity("API.Entities.Account", b =>
                 {
                     b.HasOne("API.Entities.AccountType", "AccountType")
@@ -159,6 +173,21 @@ namespace API.Data.Migrations
                     b.Navigation("AccountType");
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("API.Entities.AccountTransaction", b =>
+                {
+                    b.HasOne("API.Entities.Account", "Account")
+                        .WithMany("Transactions")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.SubCategory", null)
+                        .WithMany("Transactions")
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("API.Entities.MasterCategory", b =>
@@ -183,17 +212,6 @@ namespace API.Data.Migrations
                     b.Navigation("MasterCategory");
                 });
 
-            modelBuilder.Entity("API.Entities.Transaction", b =>
-                {
-                    b.HasOne("API.Entities.Account", "Account")
-                        .WithMany("Transactions")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("API.Entities.Account", b =>
                 {
                     b.Navigation("Transactions");
@@ -209,6 +227,11 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.MasterCategory", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("API.Entities.SubCategory", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DATE } from 'ngx-bootstrap/chronos/units/constants';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Account } from 'src/app/_models/account';
@@ -17,10 +19,10 @@ export class AccountsComponent implements OnInit {
   user: User;
   @Output() cancelSave = new EventEmitter();
   accountForm: FormGroup;
-  validationErrors: string[] = [];
 
   accountTypes: AccountType[];
   accounts: Account[];
+  pipe = new DatePipe('en-IN');
 
   constructor(
     private accountService: AccountService,
@@ -54,9 +56,18 @@ export class AccountsComponent implements OnInit {
       accountName: this.accountForm.value.accountName,
       accountType: {
         id: this.accountForm.value.accountTypeId,
-        typeName: '',
       },
-      transactions: [],
+      transactions: [
+        {
+          id: 0,
+          payee: 'Starting Balance',
+          date: new Date(),
+          creditAmount: this.accountForm.value.openingBalance,
+          debitAmount: 0,
+          accountId: this.accountForm.value.accountId,
+          subCategoryId: 0,
+        },
+      ],
     };
     if (account.id === 0) {
       this.accountService.save(account).subscribe(
@@ -86,7 +97,9 @@ export class AccountsComponent implements OnInit {
       accountTypeId: account.accountType.id,
       accountId: account.id,
       accountName: account.accountName,
-      openingBalance: 0,
+      openingBalance: account.transactions.find((t) => {
+        return t.subCategoryId === 0;
+      }).creditAmount,
     });
   }
 

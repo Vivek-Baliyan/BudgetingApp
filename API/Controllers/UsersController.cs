@@ -30,6 +30,12 @@ namespace API.Controllers
             return Ok(users);
         }
 
+        public async Task<AppUser> GetUserById(int id)
+        {
+            return await _context.Users
+            .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {

@@ -7,12 +7,26 @@
       {
         "AccountTypeId": 1,
         "AccountName": "SBI",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       },
       {
         "AccountTypeId": 2,
         "AccountName": "HDFC",
-        "Transactions": [{ "Payee": "Wifi", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Wifi",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       }
     ],
     "MasterCategories": [
@@ -40,12 +54,26 @@
       {
         "AccountTypeId": 1,
         "AccountName": "SBI",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       },
       {
         "AccountTypeId": 2,
         "AccountName": "HDFC",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       }
     ],
     "MasterCategories": [
@@ -73,12 +101,26 @@
       {
         "AccountTypeId": 1,
         "AccountName": "SBI",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       },
       {
         "AccountTypeId": 2,
         "AccountName": "HDFC",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       }
     ],
     "MasterCategories": [
@@ -106,12 +148,26 @@
       {
         "AccountTypeId": 1,
         "AccountName": "SBI",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       },
       {
         "AccountTypeId": 2,
         "AccountName": "HDFC",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       }
     ],
     "MasterCategories": [
@@ -139,12 +195,26 @@
       {
         "AccountTypeId": 1,
         "AccountName": "SBI",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       },
       {
         "AccountTypeId": 2,
         "AccountName": "HDFC",
-        "Transactions": [{ "Payee": "Dairy", "DebitAmount": 100 }]
+        "Transactions": [
+          {
+            "Date": "2021-07-17",
+            "Payee": "Dairy",
+            "DebitAmount": 100,
+            "SubCategoryId": 1
+          }
+        ]
       }
     ],
     "MasterCategories": [

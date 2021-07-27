@@ -19,6 +19,7 @@ namespace API.Data
             _mapper = mapper;
             _context = context;
         }
+
         public async Task<IEnumerable<AccountDto>> GetAccountsByUserIdAsync(int AppUserId)
         {
             return await _context.Accounts.Where(x => x.AppUserId == AppUserId)
@@ -28,12 +29,6 @@ namespace API.Data
         public async Task<IEnumerable<AccountType>> GetAccountTypesAsync()
         {
             return await _context.AccountTypes.ToListAsync();
-        }
-
-        public async Task<AppUser> GetUserByIdAsync(int id)
-        {
-            return await _context.Users.Include(a => a.Accounts)
-            .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<bool> SaveAllAsync()
@@ -48,6 +43,20 @@ namespace API.Data
         public void Remove(Account account)
         {
             _context.Accounts.Remove(account);
+        }
+
+        public async Task<Account> GetLastestAccountAsync()
+        {
+            return await _context.Accounts
+            .Include(x => x.Transactions)
+            .OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+        }
+
+        public async Task<AppUser> GetUserAccounts(int id)
+        {
+            return await _context.Users
+            .Include(x => x.Accounts)
+            .SingleOrDefaultAsync(x => x.Id == id);
         }
     }
 }
