@@ -9,17 +9,11 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Middleware
 {
-    public class ExceptionMiddleware
+    public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
     {
-        private readonly RequestDelegate _next;
-        public ILogger<ExceptionMiddleware> _logger { get; }
-        private readonly IHostEnvironment _env;
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
-        {
-            _env = env;
-            _logger = logger;
-            _next = next;
-        }
+        private readonly RequestDelegate _next = next;
+        public ILogger<ExceptionMiddleware> _logger { get; } = logger;
+        private readonly IHostEnvironment _env = env;
 
         public async Task InvokeAsync(HttpContext context)
         {

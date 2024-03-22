@@ -10,15 +10,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class AccountRepository : IAccountRepository
+    public class AccountRepository(DataContext context, IMapper mapper) : IAccountRepository
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
-        public AccountRepository(DataContext context, IMapper mapper)
-        {
-            _mapper = mapper;
-            _context = context;
-        }
+        private readonly DataContext _context = context;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<IEnumerable<AccountDto>> GetAccountsByUserIdAsync(int AppUserId)
         {

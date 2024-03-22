@@ -10,16 +10,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository(DataContext context, IMapper mapper) : ICategoryRepository
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
-
-        public CategoryRepository(DataContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        private readonly DataContext _context = context;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<IEnumerable<MasterCategoryDto>> GetCategories(int AppUserId)
         {

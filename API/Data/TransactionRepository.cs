@@ -11,16 +11,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class TransactionRepository : ITransactionRepository
+    public class TransactionRepository(DataContext context, IMapper mapper) : ITransactionRepository
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
-
-        public TransactionRepository(DataContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        private readonly DataContext _context = context;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<Account> GetTransactionsByAccountIdAsync(int id)
         {

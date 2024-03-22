@@ -4,26 +4,22 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using API.Entities;
-using API.Interfaces;
+using API.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API.Services
+namespace API.Services.Implementations
 {
-    public class TokenService : ITokenService
+    public class TokenService(IConfiguration config) : ITokenService
     {
-        private readonly SymmetricSecurityKey _key;
-        public TokenService(IConfiguration config)
-        {
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
-        }
+        private readonly SymmetricSecurityKey _key = new(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
-        public string CreteToken(AppUser user)
+        public string CreateToken(AppUser user)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Name, user.UserName),
+                new(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+                new(JwtRegisteredClaimNames.Name, user.UserName),
             };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);

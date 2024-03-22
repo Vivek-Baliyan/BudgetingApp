@@ -9,16 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(DataContext context, IMapper mapper) : IUserRepository
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
-
-        public UserRepository(DataContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        private readonly DataContext _context = context;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<AppUser> GetUserById(int AppUserId)
         {
