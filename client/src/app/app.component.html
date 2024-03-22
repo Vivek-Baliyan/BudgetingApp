@@ -1,82 +1,9 @@
-<ng-sidebar-container>
-  <!-- A sidebar -->
-  <ng-sidebar
-    opened="true"
-    mode="push"
-    sidebarClass="d-flex flex-column p-3 bg-light"
-  >
-    <a
-      routerLink="/"
-      class="
-        d-flex
-        align-items-center
-        mb-3 mb-md-0
-        me-md-auto
-        link-dark
-        text-decoration-none
-      "
-    >
-      <span class="fs-4">Budget App</span>
-    </a>
-    <hr />
-    <ul class="nav nav-pills flex-column mb-auto">
-      <ng-container *ngIf="usersService.currentUser$ | async">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/categories" routerLinkActive="active"
-            >Budget</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/accounts" routerLinkActive="active"
-            >All Accounts</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/transactions" routerLinkActive="active"
-            >Transactions</a
-          >
-        </li>
-      </ng-container>
-    </ul>
-    <button
-      *ngIf="usersService.currentUser$ | async"
-      class="btn btn-outline-success my-2 my-sm-0"
-      (click)="logout()"
-    >
-      Logout
-    </button>
-    <form
-      *ngIf="(usersService.currentUser$ | async) === null"
-      #loginForm="ngForm"
-      class="form-inline mt-2 mt-md-0"
-      (ngSubmit)="login()"
-      autocomplete="off"
-    >
-      <input
-        name="username"
-        [(ngModel)]="model.username"
-        type="text"
-        class="form-control mr-sm-2"
-        placeholder="Username"
-      />
-      <input
-        name="password"
-        [(ngModel)]="model.password"
-        type="password"
-        class="form-control mr-sm-2"
-        placeholder="Password"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Login
-      </button>
-    </form>
-  </ng-sidebar>
-
-  <!-- Page content -->
-  <div ng-sidebar-content>
-    <ngx-spinner>
-      <h3>Loading...</h3>
-    </ngx-spinner>
-    <router-outlet></router-outlet>
-  </div>
-</ng-sidebar-container>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav" mode="side" opened="true">
+    <div class="top-band">
+      <a routerLink="">
+        <span>Budget</span>
+      </a>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>
